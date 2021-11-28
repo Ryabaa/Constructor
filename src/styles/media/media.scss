@@ -1,0 +1,29 @@
+@media (max-width: 600px) {
+    .start {
+        &-title {
+            &1 {
+                font-size: 20px;
+            }
+            &2 {
+                font-size: 50px;
+            }
+        }
+        &-window {
+            width: 360px;
+            height: 260px;
+            &__input {
+                width: 330px;
+            }
+        }
+    }
+    .header {
+        &-title {
+            &1 {
+                font-size: 70px;
+            }
+            &2 {
+                font-size: 30px;
+            }
+        }
+    }
+}

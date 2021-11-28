@@ -1,0 +1,22 @@
+@media (max-width: 600px) {
+  .start-title1 {
+    font-size: 20px;
+  }
+  .start-title2 {
+    font-size: 50px;
+  }
+  .start-window {
+    width: 360px;
+    height: 260px;
+  }
+  .start-window__input {
+    width: 330px;
+  }
+  .header-title1 {
+    font-size: 70px;
+  }
+  .header-title2 {
+    font-size: 30px;
+  }
+}
+/*# sourceMappingURL=media.css.map */

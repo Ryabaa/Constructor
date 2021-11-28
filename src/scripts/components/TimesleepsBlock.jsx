@@ -1,0 +1,51 @@
+import React, { useState, useEffect, useCallback } from "react";
+import cross from "../../img/cross.png";
+
+function TimesleepsBlock({ deleteBlock, editBlock, block, blockIndex }) {
+    const initialInput = block.input;
+    const [blockInput, setBlockInput] = useState(initialInput);
+
+    const handleInputChange = (event) => {
+        setBlockInput(event.target.value)
+    };
+
+    const handleEdit = useCallback(
+        () => {
+            editBlock({ input: blockInput }, blockIndex)
+            setBlockInput(blockInput || initialInput)
+        },
+        [blockInput, blockIndex, editBlock, initialInput],
+    )
+
+    const handleDelete = () => {
+        deleteBlock(blockIndex);
+    };
+
+    useEffect(() => {
+        setBlockInput(initialInput)
+    }, [initialInput])
+
+    return (
+        <div className="options-timesleeps__block-wrapper">
+            <div className="options-timesleeps__block">
+                <div className="options-timesleeps__block-name">Text {blockIndex + 1}</div>
+                <input
+                    onChange={handleInputChange}
+                    onBlur={handleEdit}
+                    value={blockInput}
+                    placeholder="Enter text..."
+                    type="text"
+                />
+                <div className="options-timesleeps__block-time">
+                    <input max="9" type="number" />
+                </div>
+            </div>
+            <div className="options-buttons__block-line"></div>
+            <button onClick={handleDelete} type="submit" className="options-timesleeps__block-delete">
+                <img src={cross} alt="" />
+            </button>
+        </div>
+    )
+}
+
+export default TimesleepsBlock
