@@ -213,6 +213,19 @@ body {
     }
 }
 
+.download {
+    border: 2px solid $secondary;
+    width: 140px;
+    height: 60px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    @include slowTrans();
+    &:hover {
+        background: $teritary;
+    }
+}
+
 .blocks {
     display: flex;
     justify-content: center;
@@ -223,6 +236,12 @@ body {
         line-height: 100px;
         font-size: 50px;
         margin-bottom: 20px;
+    }
+    &-footer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: flex-end;
     }
     &-container {
         display: flex;

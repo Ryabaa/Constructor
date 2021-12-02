@@ -4,10 +4,8 @@ import plus from "../../img/plus.svg";
 import ButtonsBlock from "./ButtonsBlock";
 import TimesleepsBlock from "./TimesleepsBlock";
 
-function Options({ active, setActive, options, blockIndex }) {
-    const [timesleepsBlocks, setTimesleepsBlocks] = useState(options.timesleeps);
-    const [buttonsBlocks, setButtonsBlocks] = useState(options.buttons);
-
+function Options({ active, setActive, block, blockIndex, buttonsBlocks, deleteButtonsBlock, editButtonsBlock, addButtonsBlock }) {
+    const [timesleepsBlocks, setTimesleepsBlocks] = useState(block.timesleeps);
     //---------------------------Timesleeps----------------------------------------//
 
     const addTimesleepsBlock = useCallback(() => {
@@ -32,29 +30,9 @@ function Options({ active, setActive, options, blockIndex }) {
         [timesleepsBlocks]
     );
 
-    //---------------------------Buttons-------------------------------------------//
-
-    const addButtonsBlock = useCallback(() => {
-        if (buttonsBlocks.length !== 8) {
-            setButtonsBlocks([...buttonsBlocks, { input: "" }]);
-        }
-    }, [buttonsBlocks]);
-
-    const editButtonsBlock = useCallback(
-        (newBlock, blockIndex) => {
-            let newButtonsBlocks = [...buttonsBlocks]
-            newButtonsBlocks.splice(blockIndex, 1, newBlock)
-            setButtonsBlocks(newButtonsBlocks)
-        },
-        [buttonsBlocks]
-    );
-
-    const deleteButtonsBlock = useCallback(
-        (index) => {
-            setButtonsBlocks(buttonsBlocks.filter((block, blockIndex) => blockIndex !== index))
-        },
-        [buttonsBlocks]
-    );
+    const handleAddButtonsBlock = () => {
+        addButtonsBlock(block)
+    }
 
     return (
         <>
@@ -81,17 +59,17 @@ function Options({ active, setActive, options, blockIndex }) {
                         <div className="options-buttons">
                             <h2 className="options-buttons__title">Buttons</h2>
                             {
-                                buttonsBlocks.map((block, index) => (
+                                buttonsBlocks.map((buttonsBlock, index) => (
                                     <ButtonsBlock
                                         key={'ButtonsBlock' + blockIndex}
-                                        block={block}
+                                        buttonsBlock={buttonsBlock}
                                         blockIndex={index}
                                         editBlock={editButtonsBlock}
                                         deleteBlock={deleteButtonsBlock}
                                     />
                                 ))
                             }
-                            <button onClick={addButtonsBlock} className="options-buttons__block-add">
+                            <button onClick={handleAddButtonsBlock} className="options-buttons__block-add">
                                 <img src={plus} alt="" />
                             </button>
                         </div>

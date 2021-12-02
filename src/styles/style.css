@@ -273,6 +273,21 @@ body {
   width: 200px;
 }
 
+.download {
+  border: 2px solid #fff;
+  width: 140px;
+  height: 60px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 20px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.download:hover {
+  background: #ffffff28;
+}
+
 .blocks {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -292,6 +307,19 @@ body {
   line-height: 100px;
   font-size: 50px;
   margin-bottom: 20px;
+}
+
+.blocks-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .blocks-container {

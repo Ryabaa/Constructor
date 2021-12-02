@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import cross from "../../img/cross.png";
 
-function ButtonsBlock({ deleteBlock, editBlock, block, blockIndex }) {
-    const initialInput = block.input;
+function ButtonsBlock({ deleteBlock, editBlock, buttonsBlock, blockIndex }) {
+    const initialInput = buttonsBlock.input;
     const [blockInput, setBlockInput] = useState(initialInput);
 
     const handleInputChange = (event) => {
