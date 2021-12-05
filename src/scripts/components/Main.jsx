@@ -4,7 +4,6 @@ import Info from "./Info.jsx";
 
 function Main() {
     return (
-        <>
         <main className="main">
             <section className="section">
                 <h1 className="section-title">Constrtuctor</h1>
@@ -12,7 +11,6 @@ function Main() {
                 <BlocksSection />
             </section>
         </main>
-        </>
     );
 }
 

@@ -1,23 +1,26 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import plus from "../../img/plus.svg";
 import Block from "./Block.jsx";
 import Options from "./Options.jsx";
 import axios from "axios";
 
-let initialButtons = [{ input: '' }]
+let initialBlocks = [
+    { name: "Block 1", wiretapping: "", answer: "" },
+    { name: "Block 2", wiretapping: "", answer: "" },
+    { name: "Block 3", wiretapping: "", answer: "" },
+];
+
+let initialButtons = [{ name: "Button 1", input: "" }]
+let initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
 
 function BlocksSection() {
     const [buttons, setButtons] = useState(initialButtons);
-    let initialBlocksState = [
-        { name: "Block 1", wiretapping: "Список", answer: "Ты нажал список", buttons: buttons, timesleeps: [{ input: "", value: 0 }] },
-        { name: "Block 2", wiretapping: "", answer: "", buttons: buttons, timesleeps: [{ input: "", value: 0 }] },
-        { name: "Block 3", wiretapping: "", answer: "", buttons: buttons, timesleeps: [{ input: "", value: 0 }] },
-    ];
-    let [blocks, setBlocks] = useState(initialBlocksState);
+    const [timesleeps, setTimesleeps] = useState(initialTimesleeps);
+    const [blocks, setBlocks] = useState(initialBlocks);
     const [modalActive, setModalActive] = useState(false);
 
     const addBlock = useCallback(() => {
-        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", buttons: buttons, timesleeps: [{ input: "", value: 0 }] }]);
+        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "" }]);
     }, [blocks]);
 
     const deleteBlock = useCallback(
@@ -36,31 +39,73 @@ function BlocksSection() {
         [blocks]
     );
 
+    //---------------------------Options-------------------------------------------//
+
+    const editAnswer = useCallback(
+        (newAnswer, blockIndex) => {
+            let newBlocks = [...blocks];
+            newBlocks.splice(blockIndex, 1, newAnswer);
+            setBlocks(newBlocks);
+        },
+        [blocks]
+    );
+
+    const editWiretapping = useCallback(
+        (newWiretapping, blockIndex) => {
+            let newBlocks = [...blocks];
+            newBlocks.splice(blockIndex, 1, newWiretapping);
+            setBlocks(newBlocks);
+        },
+        [blocks]
+    );
 
     //---------------------------Buttons-------------------------------------------//
 
-    const addButtonsBlock = useCallback((block) => {
-        if (buttons.length !== 5) {
-            setButtons([...buttons, { input: "" }])
+    const addButtons = useCallback(() => {
+        if (buttons.length !== 4) {
+            setButtons([...buttons, { name: "Button " + (buttons.length + 1), input: "" }])
         }
     }, [buttons])
 
 
-    useEffect(() => {
-        blocks.buttons = buttons
-    })
+    const editButtons = useCallback(
+        (newButton, buttonIndex) => {
+            let newButtons = [...buttons];
+            newButtons.splice(buttonIndex, 1, newButton);
+            setButtons(newButtons);
+        },
+        [buttons]
+    );
 
-    const editButtonsBlock = (newBlock, blockIndex) => {
-        blocks.forEach((block, index) => {
-            block.buttons.splice(blockIndex, 1, newBlock)
-        })
-    }
+    const deleteButtons = useCallback(
+        (index) => {
+            setButtons(buttons.filter((button, buttonIndex) => buttonIndex !== index))
+        }, [buttons]
+    )
 
-    const deleteButtonsBlock = (index) => {
-        blocks.forEach(block => {
-            block.buttons.filter((block, blockIndex) => blockIndex !== index)
-        })
-    };
+    //---------------------------Timesleeps-------------------------------------------//
+
+    const addTimesleeps = useCallback(() => {
+        if (timesleeps.length !== 5) {
+            setTimesleeps([...timesleeps, { name: "Text " + (timesleeps.length + 1), input: "", value: 0.1 }]);
+        }
+    }, [timesleeps]);
+
+    const editTimesleeps = useCallback(
+        (newTimesleep, timesleepIndex) => {
+            let newTimesleeps = [...timesleeps];
+            newTimesleeps.splice(timesleepIndex, 1, newTimesleep);
+            setTimesleeps(newTimesleeps);
+        },
+        [timesleeps]
+    );
+
+    const deleteTimesleeps = useCallback(
+        (index) => {
+            setTimesleeps(timesleeps.filter((timesleep, timesleepIndex) => timesleepIndex !== index))
+        }, [timesleeps]
+    )
+
 
     let obj = {
         bot_commands: {},
@@ -73,19 +118,19 @@ function BlocksSection() {
             let commands = [block.answer]
             let sleep_timesValues = [0.1]
 
-            for (let i = 0; i < block.timesleeps.length; i++) {
-                if (block.timesleeps[i].value !== 0) {
-                    obj.slt_texts.push(block.timesleeps[i].input);
-                    sleep_timesValues.push(block.timesleeps[i].value);
-                    commands.splice(1, 0, `${block.timesleeps[i].value}`);
+            for (let i = 0; i < timesleeps.length; i++) {
+                if (timesleeps[i].value !== 0) {
+                    obj.slt_texts.push(timesleeps[i].input);
+                    sleep_timesValues.push(timesleeps[i].value);
+                    commands.splice(1, 0, `${timesleeps[i].value}`);
                 }
             }
 
             obj.sleep_times[block.wiretapping] = sleep_timesValues;
             obj.bot_commands[block.wiretapping] = commands
 
-            for (let i = 0; i < block.buttons.length; i++) {
-                commands.push(block.buttons[i].input)
+            for (let i = 0; i < buttons.length; i++) {
+                commands.push(buttons[i].input)
             }
         });
     };
@@ -107,25 +152,48 @@ function BlocksSection() {
     }
 
     return (
-        <>
-            <div className="blocks">
-                <h1 className="blocks-title">Blocks</h1>
-                {blocks.map((block, index) => (
+        <div className="blocks">
+            <h1 className="blocks-title">Blocks</h1>
+            {
+                blocks.map((block, index) => (
                     <>
-                        <Block key={"Block" + index} deleteBlock={deleteBlock} editBlock={editBlock} block={block} blockIndex={index} setModalActive={setModalActive} />
-                        <Options buttonsBlocks={block.buttons} deleteButtonsBlock={deleteButtonsBlock} editButtonsBlock={editButtonsBlock} addButtonsBlock={addButtonsBlock} block={block} blockIndex={index} key={"Options" + index} active={modalActive} setActive={setModalActive} />
+                        <Block
+                            key={'Block' + index}
+                            deleteBlock={deleteBlock}
+                            editBlock={editBlock}
+                            block={block}
+                            blockIndex={index}
+                            setModalActive={setModalActive}
+                        />
+                        <Options
+                            key={blocks.length}
+                            blockIndex={index}
+                            block={block}
+                            active={modalActive}
+                            setActive={setModalActive}
+                            timesleeps={timesleeps}
+                            buttons={buttons}
+                            deleteButtons={deleteButtons}
+                            editButtons={editButtons}
+                            addButtons={addButtons}
+                            deleteTimesleeps={deleteTimesleeps}
+                            editTimesleeps={editTimesleeps}
+                            addTimesleeps={addTimesleeps}
+                            editAnswer={editAnswer}
+                            editWiretapping={editWiretapping}
+                        />
                     </>
-                ))}
-                <div className="blocks-footer">
-                    <button onClick={addBlock} className="blocks-btn">
-                        <img src={plus} alt="" />
-                    </button>
-                    <button onClick={sendRequest} className="download">
-                        Download
-                    </button>
-                </div>
+                ))
+            }
+            <div className="blocks-footer">
+                <button onClick={addBlock} className="blocks-btn">
+                    <img src={plus} alt="" />
+                </button>
+                <button onClick={sendRequest} className="download">
+                    Download
+                </button>
             </div>
-        </>
+        </div>
     );
 }
 

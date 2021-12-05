@@ -840,10 +840,11 @@ body {
 }
 
 .options-timesleeps__block-time input {
-  min-width: 60px;
+  width: 60px;
   max-width: -webkit-min-content;
   max-width: -moz-min-content;
   max-width: min-content;
+  height: 100%;
   text-align: center;
   font-size: 25px;
   color: #3a3a3a;

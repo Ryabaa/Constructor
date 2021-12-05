@@ -593,8 +593,9 @@ body {
                 justify-content: center;
                 align-items: center;
                 & input {
-                    min-width: 60px;
+                    width: 60px;
                     max-width: min-content;
+                    height: 100%;
                     text-align: center;
                     font-size: 25px;
                     color: $optionsText;

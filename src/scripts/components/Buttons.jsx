@@ -1,38 +1,38 @@
 import React, { useState, useEffect, useCallback } from "react";
 import cross from "../../img/cross.png";
 
-function ButtonsBlock({ deleteBlock, editBlock, buttonsBlock, blockIndex }) {
-    const initialInput = buttonsBlock.input;
-    const [blockInput, setBlockInput] = useState(initialInput);
+function Buttons({ index, button, deleteButtons, editButtons }) {
+    const initialInput = button.input;
+    const [buttonInput, setbuttonInput] = useState(initialInput);
 
     const handleInputChange = (event) => {
-        setBlockInput(event.target.value)
-    };
+        setbuttonInput(event.target.value)
+    }
 
     const handleEdit = useCallback(
         () => {
-            editBlock({ input: blockInput }, blockIndex)
-            setBlockInput(blockInput || initialInput)
+            editButtons({ name: button.name, input: buttonInput }, index)
+            setbuttonInput(buttonInput || initialInput)
         },
-        [blockInput, blockIndex, editBlock, initialInput],
+        [buttonInput, index, editButtons, initialInput],
     )
 
     const handleDelete = () => {
-        deleteBlock(blockIndex);
-    };
+        deleteButtons(index);
+    }
 
     useEffect(() => {
-        setBlockInput(initialInput)
+        setbuttonInput(initialInput)
     }, [initialInput])
 
     return (
         <div className="options-buttons__block-wrapper">
             <div className="options-buttons__block">
-                <div className="options-buttons__block-name">Button {blockIndex + 1}</div>
+                <div className="options-buttons__block-name">{button.name}</div>
                 <input
                     onChange={handleInputChange}
                     onBlur={handleEdit}
-                    value={blockInput}
+                    value={buttonInput}
                     placeholder="Enter text..."
                     type="text"
                 />
@@ -45,4 +45,4 @@ function ButtonsBlock({ deleteBlock, editBlock, buttonsBlock, blockIndex }) {
     )
 }
 
-export default ButtonsBlock
+export default Buttons
