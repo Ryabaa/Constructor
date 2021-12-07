@@ -4,7 +4,7 @@ import plus from "../../img/plus.svg";
 import Buttons from "./Buttons";
 import Timesleeps from "./Timesleeps";
 
-function Options({ active, setActive, blockIndex, block, buttons, deleteButtons, editButtons, addButtons, timesleeps, deleteTimesleeps, editTimesleeps, addTimesleeps, editAnswer, editWiretapping }) {
+function Options({ changeActive, blockIndex, block, buttons, deleteButtons, editButtons, addButtons, timesleeps, deleteTimesleeps, editTimesleeps, addTimesleeps, editAnswer, editWiretapping }) {
     const initialAnswerInput = block.answer
     const initialWiretappingInput = block.answer
     const [answerInput, setAnswerInput] = useState(initialAnswerInput)
@@ -14,21 +14,27 @@ function Options({ active, setActive, blockIndex, block, buttons, deleteButtons,
         setAnswerInput(event.target.value)
     }
     const handleEditAnswer = () => {
-        editAnswer({ name: block.name, wiretapping: wiretappingInput, answer: answerInput }, blockIndex)
+        editAnswer({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: block.active }, blockIndex)
     }
+
+    const handleChangeActive = () => {
+        changeActive({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: false }, blockIndex)
+    };
 
 
     const handleWiretappingChange = (event) => {
         setWiretappingInput(event.target.value)
     }
     const handleEditWiretapping = () => {
-        editWiretapping({ name: block.name, wiretapping: wiretappingInput, answer: answerInput }, blockIndex)
+        editWiretapping({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: block.active }, blockIndex)
     }
 
+    console.log(block.buttons);
+
     return (
-        <div className={active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={() => setActive(false)}>
+        <div className={block.active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={handleChangeActive}>
             <section className="options" onClick={(e) => e.stopPropagation()}>
-                <button onClick={() => setActive(false)} className="options-close">
+                <button onClick={handleChangeActive} className="options-close">
                     <img src={cross} alt="" />
                 </button>
                 <h1 className="options-title">Options</h1>
@@ -69,7 +75,7 @@ function Options({ active, setActive, blockIndex, block, buttons, deleteButtons,
                         <div className="options-timesleeps__initial">
                             <p className="options-timesleeps__initial-text">Initial timesleep</p>
                             <div className="options-timesleeps__block-time">
-                                <input type="number" value="0.1" className="options-timesleeps__block-time" />
+                                <input type="number" className="options-timesleeps__block-time" />
                             </div>
                         </div>
                         {

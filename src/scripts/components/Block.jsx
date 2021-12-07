@@ -4,7 +4,7 @@ import menu from "../../img/menu.svg";
 import pencil from "../../img/pencil.png";
 
 
-function Block({ deleteBlock, editBlock, block, blockIndex, setModalActive }) {
+function Block({ changeActive, deleteBlock, editBlock, block, blockIndex }) {
     const ref = useRef()
     const initialName = block.name;
     const [blockName, setBlockName] = useState(initialName);
@@ -22,7 +22,7 @@ function Block({ deleteBlock, editBlock, block, blockIndex, setModalActive }) {
 
     const handleEdit = useCallback(
         () => {
-            editBlock({ name: blockName || `Block ${blockIndex}` }, blockIndex)
+            editBlock({ name: blockName || `Block ${blockIndex}`, wiretapping: block.wiretapping, answer: block.answer, active: block.active }, blockIndex)
             setEditing(false)
             setBlockName(blockName || initialName)
         },
@@ -33,6 +33,9 @@ function Block({ deleteBlock, editBlock, block, blockIndex, setModalActive }) {
         setBlockName(event.target.value)
     };
 
+    const handleChangeActive = () => {
+        changeActive({ name: block.name, wiretapping: block.wiretapping, answer: block.answer, active: true }, blockIndex)
+    };
 
     useEffect(() => {
         setBlockName(initialName)
@@ -54,7 +57,7 @@ function Block({ deleteBlock, editBlock, block, blockIndex, setModalActive }) {
                         <img src={pencil} alt="" />
                     </button>
                 </div>
-                <button onClick={() => setModalActive(true)} className="blocks-params">
+                <button onClick={handleChangeActive} className="blocks-params">
                     <img className="blocks-menu" src={menu} alt="" />
                 </button>
             </div>

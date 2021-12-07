@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Info() {
+function Info({ settings, editSettings }) {
     const [nameInput, setNameInput] = useState("");
     const [tokenInput, setTokenInput] = useState("");
     const [startInput, setStartInput] = useState("");
@@ -41,6 +41,12 @@ function Info() {
             default:
                 break;
         }
+        const newSettings = {
+            fileName: nameInput + ".py",
+            token: tokenInput,
+            startMsg: startInput
+        }
+        editSettings(newSettings)
     };
 
     return (
