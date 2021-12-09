@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import cross from "../../img/cross.png";
 
-function Timesleeps({ index, timesleep, deleteTimesleeps, editTimesleeps }) {
+function Timesleeps({ index, timesleep, deleteTimesleep, editTimesleep }) {
     const initialValue = timesleep.value;
     const initialInput = timesleep.input;
     const [timesleepValue, setTimesleepValue] = useState(initialValue);
@@ -16,15 +16,15 @@ function Timesleeps({ index, timesleep, deleteTimesleeps, editTimesleeps }) {
 
     const handleEdit = useCallback(
         () => {
-            editTimesleeps({ name: timesleep.name, input: timesleepInput, value: Number(timesleepValue) }, index)
+            editTimesleep({ name: timesleep.name, input: timesleepInput, value: Number(timesleepValue) }, index)
             setTimesleepInput(timesleepInput || initialInput)
             setTimesleepValue(timesleepValue || initialValue)
         },
-        [timesleepInput, index, editTimesleeps, initialInput, timesleepValue, initialValue],
+        [timesleepInput, timesleepValue],
     )
 
     const handleDelete = () => {
-        deleteTimesleeps(index);
+        deleteTimesleep(index);
     };
 
     useEffect(() => {

@@ -1,40 +1,82 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import cross from "../../img/cross.png";
 import plus from "../../img/plus.svg";
 import Buttons from "./Buttons";
 import Timesleeps from "./Timesleeps";
 
-function Options({ changeActive, blockIndex, block, buttons, deleteButtons, editButtons, addButtons, timesleeps, deleteTimesleeps, editTimesleeps, addTimesleeps, editAnswer, editWiretapping }) {
-    const initialAnswerInput = block.answer
-    const initialWiretappingInput = block.answer
-    const [answerInput, setAnswerInput] = useState(initialAnswerInput)
-    const [wiretappingInput, setWiretappingInput] = useState(initialWiretappingInput)
+
+function Options({ block, blockIndex, editBlock }) {
+    const initialButtons = [{ name: "Button 1", input: "" }]
+    const initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
+    const [buttons, setButtons] = useState(initialButtons)
+    const [timesleeps, setTimesleeps] = useState(initialTimesleeps)
+    const [answer, setAnswer] = useState("")
+    const [wiretapping, setWiretapping] = useState("")
 
     const handleAnswerChange = (event) => {
-        setAnswerInput(event.target.value)
+        setAnswer(event.target.value)
     }
-    const handleEditAnswer = () => {
-        editAnswer({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: block.active }, blockIndex)
+    const handleWiretappingChange = (event) => {
+        setWiretapping(event.target.value)
     }
 
-    const handleChangeActive = () => {
-        changeActive({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: false }, blockIndex)
+    const handleEditBlock = () => {
+        editBlock({ name: block.name, wiretapping: wiretapping, answer: answer, active: false, buttons: buttons, timesleeps: timesleeps }, blockIndex)
     };
 
+    //--Buttons--//
 
-    const handleWiretappingChange = (event) => {
-        setWiretappingInput(event.target.value)
-    }
-    const handleEditWiretapping = () => {
-        editWiretapping({ name: block.name, wiretapping: wiretappingInput, answer: answerInput, active: block.active }, blockIndex)
-    }
+    const addButton = useCallback(() => {
+        setButtons([...buttons, { name: "Button " + (buttons.length + 1), input: "" }])
+    },
+        [buttons]
+    );
 
-    console.log(block.buttons);
+    const editButton = useCallback(
+        (newButton, buttonIndex) => {
+            let newButtons = [...buttons];
+            newButtons.splice(buttonIndex, 1, newButton);
+            setButtons(newButtons);
+        },
+        [buttons]
+    );
+
+    const deleteButton = useCallback(
+        (index) => {
+            setButtons(buttons.filter((button, buttonIndex) => buttonIndex !== index));
+        },
+        [buttons]
+    );
+
+    //--Timesleeps--//
+
+    const addTimesleep = useCallback(() => {
+        setTimesleeps([...timesleeps, { name: "Text " + (timesleeps.length + 1), input: "", value: 0.1 }])
+    },
+        [timesleeps]
+    );
+
+    const editTimesleep = useCallback(
+        (newTimesleep, timesleepIndex) => {
+            let newTimesleeps = [...timesleeps];
+            newTimesleeps.splice(timesleepIndex, 1, newTimesleep);
+            setTimesleeps(newTimesleeps);
+        },
+        [timesleeps]
+    );
+
+    const deleteTimesleep = useCallback(
+        (index) => {
+            setTimesleeps(timesleeps.filter((timesleep, timesleepIndex) => timesleepIndex !== index));
+        },
+        [timesleeps]
+    );
+
 
     return (
-        <div className={block.active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={handleChangeActive}>
+        <div className={block.active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={handleEditBlock}>
             <section className="options" onClick={(e) => e.stopPropagation()}>
-                <button onClick={handleChangeActive} className="options-close">
+                <button onClick={handleEditBlock} className="options-close">
                     <img src={cross} alt="" />
                 </button>
                 <h1 className="options-title">Options</h1>
@@ -42,13 +84,13 @@ function Options({ changeActive, blockIndex, block, buttons, deleteButtons, edit
                     <div className="options-container__name">
                         <p>Wiretapping</p>
                     </div>
-                    <input placeholder="Enter text..." onChange={handleWiretappingChange} onBlur={handleEditWiretapping} value={wiretappingInput} type="text" className="options-container__input" />
+                    <input placeholder="Enter text..." onChange={handleWiretappingChange} value={wiretapping} type="text" className="options-container__input" />
                 </div>
                 <div className="options-container options-container2">
                     <div className="options-container__name">
                         <p>Text</p>
                     </div>
-                    <input placeholder="Enter text..." onChange={handleAnswerChange} onBlur={handleEditAnswer} value={answerInput} type="text" className="options-container__input" />
+                    <input placeholder="Enter text..." onChange={handleAnswerChange} value={answer} type="text" className="options-container__input" />
                 </div>
                 <div className="options-box">
 
@@ -60,12 +102,12 @@ function Options({ changeActive, blockIndex, block, buttons, deleteButtons, edit
                                     key={'Buttons' + index}
                                     index={index}
                                     button={button}
-                                    editButtons={editButtons}
-                                    deleteButtons={deleteButtons}
+                                    editButton={editButton}
+                                    deleteButton={deleteButton}
                                 />
                             ))
                         }
-                        <button onClick={addButtons} className="options-buttons__block-add">
+                        <button onClick={addButton} className="options-buttons__block-add">
                             <img src={plus} alt="" />
                         </button>
                     </div>
@@ -84,12 +126,12 @@ function Options({ changeActive, blockIndex, block, buttons, deleteButtons, edit
                                     key={'Timesleeps' + index}
                                     index={index}
                                     timesleep={timesleep}
-                                    editTimesleeps={editTimesleeps}
-                                    deleteTimesleeps={deleteTimesleeps}
+                                    editTimesleep={editTimesleep}
+                                    deleteTimesleep={deleteTimesleep}
                                 />
                             ))
                         }
-                        <button onClick={addTimesleeps} className="options-timesleeps__block-add">
+                        <button onClick={addTimesleep} className="options-timesleeps__block-add">
                             <img src={plus} alt="" />
                         </button>
                     </div>

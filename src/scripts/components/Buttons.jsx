@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import cross from "../../img/cross.png";
 
-function Buttons({ index, button, deleteButtons, editButtons }) {
+function Buttons({ index, button, deleteButton, editButton }) {
     const initialInput = button.input;
     const [buttonInput, setbuttonInput] = useState(initialInput);
 
@@ -11,14 +11,14 @@ function Buttons({ index, button, deleteButtons, editButtons }) {
 
     const handleEdit = useCallback(
         () => {
-            editButtons({ name: button.name, input: buttonInput }, index)
+            editButton({ name: button.name, input: buttonInput }, index)
             setbuttonInput(buttonInput || initialInput)
         },
-        [buttonInput, index, editButtons, initialInput],
+        [buttonInput],
     )
 
     const handleDelete = () => {
-        deleteButtons(index);
+        deleteButton(index);
     }
 
     useEffect(() => {

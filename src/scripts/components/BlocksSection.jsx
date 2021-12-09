@@ -3,8 +3,7 @@ import plus from "../../img/plus.svg";
 import Block from "./Block.jsx";
 import Options from "./Options.jsx";
 
-function BlocksSection({ deleteBlock, editBlock, timesleeps, buttons, deleteButtons,
-    editButtons, addButtons, deleteTimesleeps, editTimesleeps, addTimesleeps, editAnswer, editWiretapping, addBlock, sendRequest, blocks, changeActive }) {
+function BlocksSection({ blocks, addBlock, editBlock, deleteBlock, sendRequest }) {
 
     return (
         <div className="blocks">
@@ -14,27 +13,16 @@ function BlocksSection({ deleteBlock, editBlock, timesleeps, buttons, deleteButt
                     <>
                         <Block
                             key={'Block' + index}
-                            deleteBlock={deleteBlock}
-                            editBlock={editBlock}
                             block={block}
+                            editBlock={editBlock}
+                            deleteBlock={deleteBlock}
                             blockIndex={index}
-                            changeActive={changeActive}
                         />
                         <Options
                             key={blocks.length}
                             blockIndex={index}
                             block={block}
-                            timesleeps={timesleeps}
-                            buttons={buttons}
-                            deleteButtons={deleteButtons}
-                            editButtons={editButtons}
-                            addButtons={addButtons}
-                            deleteTimesleeps={deleteTimesleeps}
-                            editTimesleeps={editTimesleeps}
-                            addTimesleeps={addTimesleeps}
-                            editAnswer={editAnswer}
-                            editWiretapping={editWiretapping}
-                            changeActive={changeActive}
+                            editBlock={editBlock}
                         />
                     </>
                 ))
