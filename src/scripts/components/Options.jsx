@@ -6,7 +6,7 @@ import Timesleeps from "./Timesleeps";
 
 
 function Options({ block, blockIndex, editBlock }) {
-    const chboxRef = useRef()
+    const chboxCustomRef = useRef()
     const initialButtons = [{ name: "Button 1", input: "" }]
     const initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
     const [buttons, setButtons] = useState(initialButtons)
@@ -80,7 +80,7 @@ function Options({ block, blockIndex, editBlock }) {
 
 
     const customChange = () => {
-        if (chboxRef.current.checked) {
+        if (chboxCustomRef.current.checked) {
             setCustom(true)
         } else {
             setCustom(false)
@@ -100,16 +100,16 @@ function Options({ block, blockIndex, editBlock }) {
                     <div className="options-header__container">
                         <div className="options-custom">
                             <label className="switch">
-                                <input type="text" className="checkbox" />
-                                <span className="slider round"></span>
+                                <input ref={chboxCustomRef} onChange={customChange} type="checkbox" />
+                                <span className="slider"></span>
                             </label>
                             <div className="options-custom__border"></div>
                             <p className="options-custom__text">Custom</p>
                         </div>
                         <div className="options-custom">
                             <label className="switch">
-                                <input type="text" className="checkbox" />
-                                <span className="slider round"></span>
+                                <input type="checkbox" />
+                                <span className="slider"></span>
                             </label>
                             <div className="options-custom__border"></div>
                             <p className="options-custom__text">Timesleeps</p>

@@ -11,9 +11,9 @@ const initialSettings = {
 }
 
 const initialBlocks = [
-    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }] },
-    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }] },
-    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }] },
+    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
+    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
+    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
 ];
 
 function Main() {
@@ -21,7 +21,7 @@ function Main() {
     const [settings, setSettings] = useState(initialSettings)
 
     const addBlock = useCallback(() => {
-        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }] }]);
+        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false }]);
     }, [blocks]);
 
     const deleteBlock = useCallback(
