@@ -50,31 +50,33 @@ function Main() {
     //---------------------------Object build-------------------------------------------//
 
     let obj = {
-        bot_settings: {},
+        bot_settings: settings,
         bot_commands: {},
         sleep_times: {},
-        slt_texts: [],
+        slt_texts: {}
     };
 
     const buildObject = () => {
         blocks.forEach((block, index) => {
             let commands = [block.answer]
-            let sleep_timesValues = [0.1]
+            let sleep_timesValues = [block.initialTime]
+            let sleep_texts = []
 
-            for (let i = 0; i < block.timesleeps.length; i++) {
-                if (block.timesleeps[i].value !== 0) {
-                    obj.slt_texts.push(block.timesleeps[i].input);
-                    sleep_timesValues.push(block.timesleeps[i].value);
-                    commands.splice(1, 0, `${block.timesleeps[i].value}`);
+            block.timesleeps.forEach(i => {
+                if (i.value !== 0) {
+                    sleep_texts.push(i.input);
+                    sleep_timesValues.push(i.value);
+                    commands.splice(1, 0, `${i.value}`);
                 }
-            }
+            })
 
             obj.sleep_times[block.wiretapping] = sleep_timesValues;
+            obj.slt_texts[block.wiretapping] = sleep_texts;
             obj.bot_commands[block.wiretapping] = commands
 
-            for (let i = 0; i < block.buttons.length; i++) {
-                commands.push(block.buttons[i].input)
-            }
+            block.buttons.forEach(i => {
+                commands.push(i.input)
+            })
         });
     };
 
@@ -82,6 +84,7 @@ function Main() {
 
     const sendRequest = async () => {
         buildObject()
+        console.log(obj);
         let json = JSON.stringify(obj)
         const res = await axios
             .post("http://localhost:8000/data", json)

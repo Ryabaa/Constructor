@@ -96,11 +96,12 @@ body {
     row-gap: 7px;
     &-name {
         height: 70px;
-        width: 250px;
+        min-width: 250px;
         border: 2px solid $secondary;
         display: flex;
         justify-content: center;
         margin-right: 90px;
+        padding: 0 20px;
         align-items: center;
         border-radius: 10px;
         grid-row: 1 / 2;
@@ -498,6 +499,42 @@ body {
         display: flex;
         column-gap: 100px;
         flex-wrap: wrap;
+    }
+    &-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        column-gap: 50px;
+        margin-bottom: 50px;
+        row-gap: 50px;
+        &__border {
+            width: 4px;
+            border-radius: 5px;
+            height: 100%;
+            background-color: $teritary;
+        }
+        &__container {
+            row-gap: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &-custom {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        row-gap: 5px;
+        justify-content: start;
+        &__border {
+            background-color: $teritary;
+            width: 15px;
+            height: 2px;
+        }
+        &__text {
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: $secondary;
+        }
     }
     &-close {
         position: absolute;

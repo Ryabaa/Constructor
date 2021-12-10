@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import cross from "../../img/cross.png";
 import plus from "../../img/plus.svg";
 import Buttons from "./Buttons";
@@ -6,12 +6,15 @@ import Timesleeps from "./Timesleeps";
 
 
 function Options({ block, blockIndex, editBlock }) {
+    const chboxRef = useRef()
     const initialButtons = [{ name: "Button 1", input: "" }]
     const initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
     const [buttons, setButtons] = useState(initialButtons)
     const [timesleeps, setTimesleeps] = useState(initialTimesleeps)
     const [answer, setAnswer] = useState("")
     const [wiretapping, setWiretapping] = useState("")
+    const [initialTime, setInitialTime] = useState(0.1)
+    const [custom, setCustom] = useState(false)
 
     const handleAnswerChange = (event) => {
         setAnswer(event.target.value)
@@ -19,9 +22,12 @@ function Options({ block, blockIndex, editBlock }) {
     const handleWiretappingChange = (event) => {
         setWiretapping(event.target.value)
     }
+    const handleChangeTime = (event) => {
+        setInitialTime(event.target.value)
+    }
 
     const handleEditBlock = () => {
-        editBlock({ name: block.name, wiretapping: wiretapping, answer: answer, active: false, buttons: buttons, timesleeps: timesleeps }, blockIndex)
+        editBlock({ name: block.name, wiretapping: wiretapping, answer: answer, active: false, buttons: buttons, timesleeps: timesleeps, initialTimesleep: initialTime, custom: custom }, blockIndex)
     };
 
     //--Buttons--//
@@ -73,13 +79,44 @@ function Options({ block, blockIndex, editBlock }) {
     );
 
 
+    const customChange = () => {
+        if (chboxRef.current.checked) {
+            setCustom(true)
+        } else {
+            setCustom(false)
+        }
+    }
+
+
     return (
         <div className={block.active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={handleEditBlock}>
             <section className="options" onClick={(e) => e.stopPropagation()}>
                 <button onClick={handleEditBlock} className="options-close">
                     <img src={cross} alt="" />
                 </button>
-                <h1 className="options-title">Options</h1>
+                <div className="options-header">
+                    <h1 className="options-title">Options</h1>
+                    <div className="options-header__border"></div>
+                    <div className="options-header__container">
+                        <div className="options-custom">
+                            <label className="switch">
+                                <input type="text" className="checkbox" />
+                                <span className="slider round"></span>
+                            </label>
+                            <div className="options-custom__border"></div>
+                            <p className="options-custom__text">Custom</p>
+                        </div>
+                        <div className="options-custom">
+                            <label className="switch">
+                                <input type="text" className="checkbox" />
+                                <span className="slider round"></span>
+                            </label>
+                            <div className="options-custom__border"></div>
+                            <p className="options-custom__text">Timesleeps</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="options-container options-container1">
                     <div className="options-container__name">
                         <p>Wiretapping</p>
@@ -117,7 +154,7 @@ function Options({ block, blockIndex, editBlock }) {
                         <div className="options-timesleeps__initial">
                             <p className="options-timesleeps__initial-text">Initial timesleep</p>
                             <div className="options-timesleeps__block-time">
-                                <input type="number" className="options-timesleeps__block-time" />
+                                <input type="number" value={initialTime} onChange={handleChangeTime} className="options-timesleeps__block-time" />
                             </div>
                         </div>
                         {

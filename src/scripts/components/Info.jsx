@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 
 function Info({ settings, editSettings }) {
+    const refName = useRef()
+    const refToken = useRef()
+    const refStart = useRef()
     const [nameInput, setNameInput] = useState("");
     const [tokenInput, setTokenInput] = useState("");
     const [startInput, setStartInput] = useState("");
@@ -25,6 +28,28 @@ function Info({ settings, editSettings }) {
                 break;
         }
     };
+
+    const editingName = useCallback(() => {
+        setNameActive(true)
+        refName.current.focus();
+        refName.current.selectionStart = nameInput.length
+    },
+        [nameActive],
+    )
+    const editingToken = useCallback(() => {
+        setTokenActive(true)
+        refToken.current.focus();
+        refToken.current.selectionStart = tokenInput.length
+    },
+        [tokenActive],
+    )
+    const editingStart = useCallback(() => {
+        setStartActive(true)
+        refStart.current.focus();
+        refStart.current.selectionStart = startInput.length
+    },
+        [startActive],
+    )
 
     const handleSave = (el) => {
         switch (el) {
@@ -59,12 +84,14 @@ function Info({ settings, editSettings }) {
                     <input
                         onBlur={() => handleSave("name")}
                         type="text"
+                        ref={refName}
+                        maxLength={20}
                         placeholder="Write bot name..."
                         value={nameInput}
                         onChange={(event) => handleInputChange("name", event)}
                         className={nameActive ? "info-input info-input__active" : "info-input"}
                     />
-                    <button onClick={() => setNameActive(true)} className="info-btn info-btn1">
+                    <button onClick={editingName} className="info-btn info-btn1">
                         Edit name
                     </button>
                 </div>
@@ -73,12 +100,13 @@ function Info({ settings, editSettings }) {
                     <input
                         onBlur={() => handleSave("token")}
                         type="text"
+                        ref={refToken}
                         placeholder="Write bot token..."
                         value={tokenInput}
                         onChange={(event) => handleInputChange("token", event)}
                         className={tokenActive ? "info-input info-input__active" : "info-input"}
                     />
-                    <button onClick={() => setTokenActive(true)} className="info-btn info-btn2">
+                    <button onClick={editingToken} className="info-btn info-btn2">
                         Edit token
                     </button>
                 </div>
@@ -87,12 +115,13 @@ function Info({ settings, editSettings }) {
                     <input
                         onBlur={() => handleSave("start")}
                         type="text"
+                        ref={refStart}
                         placeholder="Write bot start message..."
                         value={startInput}
                         onChange={(event) => handleInputChange("start", event)}
                         className={startActive ? "info-input info-input__active" : "info-input"}
                     />
-                    <button onClick={() => setStartActive(true)} className="info-btn info-btn3">
+                    <button onClick={editingStart} className="info-btn info-btn3">
                         Edit start
                     </button>
                 </div>
