@@ -7,13 +7,14 @@ import axios from "axios";
 const initialSettings = {
     fileName: "",
     token: "",
-    startMsg: ""
+    startMsg: "",
+    firstBtn: ""
 }
 
 const initialBlocks = [
-    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
-    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
-    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false },
+    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
+    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
+    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
 ];
 
 function Main() {
@@ -21,7 +22,7 @@ function Main() {
     const [settings, setSettings] = useState(initialSettings)
 
     const addBlock = useCallback(() => {
-        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTime: 0.1, custom: false }]);
+        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false }]);
     }, [blocks]);
 
     const deleteBlock = useCallback(
@@ -49,45 +50,53 @@ function Main() {
 
     //---------------------------Object build-------------------------------------------//
 
-    let obj = {
-        bot_settings: settings,
-        bot_commands: {},
-        sleep_times: {},
-        slt_texts: {}
-    };
 
     const buildObject = () => {
+        let obj = {
+            bot_settings: settings,
+            bot_commands: {},
+            sleep_times: {},
+            slt_texts: {},
+            custom_code_blocks: []
+        };
         blocks.forEach((block, index) => {
             let commands = [block.answer]
-            let sleep_timesValues = [block.initialTime]
+            let sleep_timesValues = [block.initialTimesleep]
             let sleep_texts = []
 
-            block.timesleeps.forEach(i => {
-                if (i.value !== 0) {
-                    sleep_texts.push(i.input);
-                    sleep_timesValues.push(i.value);
-                    commands.splice(1, 0, `${i.value}`);
-                }
-            })
+            if (block.custom == true) {
+                obj.custom_code_blocks.push(block.wiretapping)
+            } else {
+                obj.sleep_times[block.wiretapping] = sleep_timesValues;
+                obj.slt_texts[block.wiretapping] = sleep_texts;
+                obj.bot_commands[block.wiretapping] = commands
 
-            obj.sleep_times[block.wiretapping] = sleep_timesValues;
-            obj.slt_texts[block.wiretapping] = sleep_texts;
-            obj.bot_commands[block.wiretapping] = commands
+                block.buttons.forEach(i => {
+                    commands.push(i.input)
+                })
+            }
 
-            block.buttons.forEach(i => {
-                commands.push(i.input)
-            })
+            if (block.sleep == true) {
+                commands.splice(1, 0, 'sleep');
+                block.timesleeps.forEach(i => {
+                    if (i.value !== 0) {
+                        sleep_texts.push(i.input);
+                        sleep_timesValues.push(i.value);
+                    }
+                })
+            } else {
+                commands.splice(1, 0, '');
+            }
         });
+        return obj;
     };
 
     //---------------------------Request-------------------------------------------//
 
     const sendRequest = async () => {
-        buildObject()
-        console.log(obj);
-        let json = JSON.stringify(obj)
+        let pyObject = buildObject()
         const res = await axios
-            .post("http://localhost:8000/data", json)
+            .post("http://localhost:8000/data", pyObject)
             .then(function (response) {
                 console.log(response);
             })

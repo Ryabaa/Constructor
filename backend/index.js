@@ -1,6 +1,7 @@
 const express = require('express')
-const pyCode = require("./pyCode.js");
+const createPyCode = require("./pyCode.js");
 const fs = require("fs");
+const path = require("path");
 const cors = require('cors')
 const app = express()
 
@@ -15,19 +16,26 @@ app.use(function (req, res, next) {
 app.use(cors());
 
 const handler = (req, res) => {
-    console.log(req.body)
+    let data = req.body
+    let jsonData = JSON.stringify(data)
 
     let time = new Date().toLocaleTimeString()
     let date = new Date().toLocaleDateString()
-    /*     fs.writeFile(`${data.filePath}`, `${pyCode(date, time, data)}`, (err) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-        }); */
 
+    const fileName = data.bot_settings.fileName
+    const pyCode = createPyCode(date, time, jsonData)
+
+    fs.writeFile(fileName, pyCode, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
+
+    console.log('Succes!')
     res.send("Succes");
 }
+
 
 app.use("/data", handler);
 

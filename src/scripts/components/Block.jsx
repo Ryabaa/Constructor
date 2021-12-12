@@ -23,7 +23,7 @@ function Block({ deleteBlock, editBlock, block, blockIndex }) {
 
     const handleEdit = useCallback(
         () => {
-            editBlock({ name: blockName || `Block ${blockIndex}`, wiretapping: block.wiretapping, answer: block.answer, active: block.active, buttons: block.buttons, timesleeps: block.timesleeps, initialTimesleep: block.initialTime, custom: block.custom }, blockIndex)
+            editBlock({ name: blockName || `Block ${blockIndex}`, wiretapping: block.wiretapping, answer: block.answer, active: block.active, buttons: block.buttons, timesleeps: block.timesleeps, initialTimesleep: block.initialTimesleep, custom: block.custom, sleep: block.sleep }, blockIndex)
             setEditing(false)
             setBlockName(blockName || initialName)
         },
@@ -35,7 +35,7 @@ function Block({ deleteBlock, editBlock, block, blockIndex }) {
     };
 
     const handleEditActive = () => {
-        editBlock({ name: block.name, wiretapping: block.wiretapping, answer: block.answer, active: true, buttons: block.buttons, timesleeps: block.timesleeps, initialTimesleep: block.initialTime, custom: block.custom }, blockIndex)
+        editBlock({ name: block.name, wiretapping: block.wiretapping, answer: block.answer, active: true, buttons: block.buttons, timesleeps: block.timesleeps, initialTimesleep: block.initialTimesleep, custom: block.custom, sleep: block.sleep }, blockIndex)
     };
 
     useEffect(() => {

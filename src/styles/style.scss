@@ -55,11 +55,23 @@ input {
 }
 
 body {
-    background: linear-gradient(211deg, rgba(0, 0, 0, 0.3) 30%, rgba(219, 18, 68, 0.5) 100%), url(../img/bg2.png);
+    position: relative;
+
+    &::before {
+        background: url("../img/background.jpg") no-repeat center center;
+        background-size: cover;
+        content: " ";
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        will-change: transform;
+        z-index: -1;
+    }
 }
 
 .main {
-    background: linear-gradient(211deg, rgba(0, 0, 0, 0.3) 30%, rgba(219, 18, 68, 0.5) 100%), url(../img/bg2.png);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -78,12 +90,11 @@ body {
     min-height: 1500px;
     max-height: max-content;
     width: 90%;
-    margin: 100px 0;
-    padding-top: 50px;
-    padding: 100px 15%;
+    padding: 70px 15%;
     &-title {
         color: $secondary;
         font-size: 110px;
+        margin-bottom: 50px;
     }
 }
 
@@ -133,10 +144,11 @@ body {
         width: 120px;
     }
     &-container {
-        width: 350px;
+        width: 450px;
         display: flex;
         justify-content: center;
         flex-direction: column;
+        row-gap: 10px;
         align-items: flex-end;
     }
     &-block {
@@ -150,7 +162,7 @@ body {
         transition: all ease 0.5s;
         border-radius: 20px 0 0 20px;
         &:hover {
-            width: 350px;
+            width: 450px;
             & button {
                 background: $secondary;
                 color: #494949;
@@ -158,56 +170,96 @@ body {
             & input {
                 visibility: visible;
                 width: 200px;
+                &::placeholder {
+                    color: #a5a5a5;
+                }
             }
         }
         &1 {
-            width: 160px;
+            width: 170px;
             & button {
-                width: 160px;
+                width: 170px;
             }
             &__active {
-                width: 350px;
+                width: 450px;
                 & button {
                     background: $secondary;
                     color: #494949;
-                    width: 160px;
+                    width: 170px;
                 }
                 & input {
                     visibility: visible;
                     width: 200px;
+                    color: $secondary;
+                }
+                & input::placeholder {
+                    color: #a5a5a5;
                 }
             }
         }
         &2 {
-            width: 140px;
+            width: 170px;
             & button {
-                width: 140px;
+                width: 170px;
             }
             &__active {
-                width: 350px;
+                width: 450px;
                 & button {
                     background: $secondary;
                     color: #494949;
-                    width: 140px;
+                    width: 170px;
                 }
                 & input {
                     visibility: visible;
                     width: 200px;
+                    color: $secondary;
                 }
+            }
+            & input::placeholder {
+                color: #a5a5a5;
             }
         }
         &3 {
-            width: 120px;
+            width: 170px;
+            & button {
+                width: 170px;
+            }
             &__active {
-                width: 350px;
+                width: 450px;
                 & button {
                     background: $secondary;
                     color: #494949;
-                    width: 120px;
+                    width: 170px;
                 }
                 & input {
                     visibility: visible;
                     width: 200px;
+                    color: $secondary;
+                }
+            }
+            & input::placeholder {
+                color: #a5a5a5;
+            }
+        }
+        &4 {
+            width: 170px;
+            & button {
+                width: 170px;
+            }
+            &__active {
+                width: 450px;
+                & button {
+                    background: $secondary;
+                    color: #494949;
+                    width: 170px;
+                }
+                & input {
+                    visibility: visible;
+                    width: 200px;
+                    color: $secondary;
+                }
+                & input::placeholder {
+                    color: #a5a5a5;
                 }
             }
         }
@@ -216,14 +268,19 @@ body {
 
 .download {
     border: 2px solid $secondary;
-    width: 140px;
+    width: 170px;
     height: 60px;
     border-radius: 20px;
-    color: #fff;
+    color: $optionsText;
     font-size: 20px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background: $secondary;
     @include slowTrans();
     &:hover {
         background: $teritary;
+        color: $secondary;
     }
 }
 
@@ -316,14 +373,13 @@ body {
         opacity: 0.9;
         justify-self: end;
         margin-left: 20px;
-        border-radius: 20px;
         border: 2px solid $secondary;
         height: 70px;
         width: 70px;
+        border-radius: 50px;
         @include slowTrans();
         &:hover {
             background: $teritary;
-            border-radius: 50px;
         }
         & img {
             height: 25px;
@@ -468,7 +524,7 @@ body {
     position: relative;
     padding: 50px 5%;
     border-radius: 65px 10px 10px 65px;
-    background: #c2c2c225;
+    background: #4747477e;
     opacity: 1;
     z-index: 99;
     overflow-x: hidden;
@@ -478,7 +534,9 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(211deg, rgba(0, 0, 0, 0.788) 30%, rgba(219, 18, 68, 0.493) 100%), url(../img/bg2.png);
+        background: url(../img/background.jpg) top;
+        background-attachment: fixed;
+        background-size: cover;
         position: fixed;
         height: 100%;
         width: 100%;
@@ -675,7 +733,7 @@ body {
 .switch {
     position: relative;
     display: inline-block;
-    width: 75px;
+    width: 85px;
     height: 40px;
     & input {
         opacity: 0;
@@ -691,7 +749,7 @@ body {
     }
 
     & input:checked + .slider:before {
-        transform: translateX(35px);
+        transform: translateX(45px);
     }
 }
 
@@ -705,7 +763,7 @@ body {
     background-color: $teritary;
     border: $secondary 2px solid;
     transition: 0.4s;
-    border-radius: 34px;
+    border-radius: 20px;
     &:before {
         border-radius: 50%;
         position: absolute;
@@ -714,7 +772,7 @@ body {
         width: 30px;
         left: 4px;
         bottom: 3px;
-        background-color: #252525;
+        background-color: #313131;
         transition: 0.4s;
     }
 }

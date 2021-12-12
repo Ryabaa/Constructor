@@ -52,11 +52,23 @@ input {
 }
 
 body {
-  background: linear-gradient(211deg, rgba(0, 0, 0, 0.3) 30%, rgba(219, 18, 68, 0.5) 100%), url(../img/bg2.png);
+  position: relative;
+}
+
+body::before {
+  background: url("../img/background.jpg") no-repeat center center;
+  background-size: cover;
+  content: " ";
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  will-change: transform;
+  z-index: -1;
 }
 
 .main {
-  background: linear-gradient(211deg, rgba(0, 0, 0, 0.3) 30%, rgba(219, 18, 68, 0.5) 100%), url(../img/bg2.png);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -84,14 +96,13 @@ body {
   max-height: -moz-max-content;
   max-height: max-content;
   width: 90%;
-  margin: 100px 0;
-  padding-top: 50px;
-  padding: 100px 15%;
+  padding: 70px 15%;
 }
 
 .section-title {
   color: #fff;
   font-size: 110px;
+  margin-bottom: 50px;
 }
 
 .info {
@@ -162,7 +173,7 @@ body {
 }
 
 .info-container {
-  width: 350px;
+  width: 450px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -173,6 +184,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  row-gap: 10px;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
@@ -196,7 +208,7 @@ body {
 }
 
 .info-block:hover {
-  width: 350px;
+  width: 450px;
 }
 
 .info-block:hover button {
@@ -209,84 +221,200 @@ body {
   width: 200px;
 }
 
+.info-block:hover input::-webkit-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block:hover input:-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block:hover input::-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block:hover input::placeholder {
+  color: #a5a5a5;
+}
+
 .info-block1 {
-  width: 160px;
+  width: 170px;
 }
 
 .info-block1 button {
-  width: 160px;
+  width: 170px;
 }
 
 .info-block1__active {
-  width: 350px;
+  width: 450px;
 }
 
 .info-block1__active button {
   background: #fff;
   color: #494949;
-  width: 160px;
+  width: 170px;
 }
 
 .info-block1__active input {
   visibility: visible;
   width: 200px;
+  color: #fff;
+}
+
+.info-block1__active input::-webkit-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block1__active input:-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block1__active input::-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block1__active input::placeholder {
+  color: #a5a5a5;
 }
 
 .info-block2 {
-  width: 140px;
+  width: 170px;
 }
 
 .info-block2 button {
-  width: 140px;
+  width: 170px;
 }
 
 .info-block2__active {
-  width: 350px;
+  width: 450px;
 }
 
 .info-block2__active button {
   background: #fff;
   color: #494949;
-  width: 140px;
+  width: 170px;
 }
 
 .info-block2__active input {
   visibility: visible;
   width: 200px;
+  color: #fff;
+}
+
+.info-block2 input::-webkit-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block2 input:-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block2 input::-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block2 input::placeholder {
+  color: #a5a5a5;
 }
 
 .info-block3 {
-  width: 120px;
+  width: 170px;
+}
+
+.info-block3 button {
+  width: 170px;
 }
 
 .info-block3__active {
-  width: 350px;
+  width: 450px;
 }
 
 .info-block3__active button {
   background: #fff;
   color: #494949;
-  width: 120px;
+  width: 170px;
 }
 
 .info-block3__active input {
   visibility: visible;
   width: 200px;
+  color: #fff;
+}
+
+.info-block3 input::-webkit-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block3 input:-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block3 input::-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block3 input::placeholder {
+  color: #a5a5a5;
+}
+
+.info-block4 {
+  width: 170px;
+}
+
+.info-block4 button {
+  width: 170px;
+}
+
+.info-block4__active {
+  width: 450px;
+}
+
+.info-block4__active button {
+  background: #fff;
+  color: #494949;
+  width: 170px;
+}
+
+.info-block4__active input {
+  visibility: visible;
+  width: 200px;
+  color: #fff;
+}
+
+.info-block4__active input::-webkit-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block4__active input:-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block4__active input::-ms-input-placeholder {
+  color: #a5a5a5;
+}
+
+.info-block4__active input::placeholder {
+  color: #a5a5a5;
 }
 
 .download {
   border: 2px solid #fff;
-  width: 140px;
+  width: 170px;
   height: 60px;
   border-radius: 20px;
-  color: #fff;
+  color: #3a3a3a;
   font-size: 20px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background: #fff;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .download:hover {
   background: #ffffff28;
+  color: #fff;
 }
 
 .blocks {
@@ -427,17 +555,16 @@ body {
   -ms-grid-column-align: end;
       justify-self: end;
   margin-left: 20px;
-  border-radius: 20px;
   border: 2px solid #fff;
   height: 70px;
   width: 70px;
+  border-radius: 50px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .blocks-delete:hover {
   background: #ffffff28;
-  border-radius: 50px;
 }
 
 .blocks-delete img {
@@ -532,7 +659,7 @@ body {
   position: relative;
   padding: 50px 5%;
   border-radius: 65px 10px 10px 65px;
-  background: #c2c2c225;
+  background: #4747477e;
   opacity: 1;
   z-index: 99;
   overflow-x: hidden;
@@ -550,7 +677,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: linear-gradient(211deg, rgba(0, 0, 0, 0.788) 30%, rgba(219, 18, 68, 0.493) 100%), url(../img/bg2.png);
+  background: url(../img/background.jpg) top;
+  background-attachment: fixed;
+  background-size: cover;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -1071,7 +1200,7 @@ body {
 .switch {
   position: relative;
   display: inline-block;
-  width: 75px;
+  width: 85px;
   height: 40px;
 }
 
@@ -1091,8 +1220,8 @@ body {
 }
 
 .switch input:checked + .slider:before {
-  -webkit-transform: translateX(35px);
-          transform: translateX(35px);
+  -webkit-transform: translateX(45px);
+          transform: translateX(45px);
 }
 
 .slider {
@@ -1106,7 +1235,7 @@ body {
   border: #fff 2px solid;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-radius: 34px;
+  border-radius: 20px;
 }
 
 .slider:before {
@@ -1117,7 +1246,7 @@ body {
   width: 30px;
   left: 4px;
   bottom: 3px;
-  background-color: #252525;
+  background-color: #313131;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

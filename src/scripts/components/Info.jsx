@@ -4,13 +4,17 @@ function Info({ settings, editSettings }) {
     const refName = useRef()
     const refToken = useRef()
     const refStart = useRef()
+    const refButton = useRef()
+
     const [nameInput, setNameInput] = useState("");
     const [tokenInput, setTokenInput] = useState("");
     const [startInput, setStartInput] = useState("");
+    const [buttonInput, setButtonInput] = useState("");
 
     const [nameActive, setNameActive] = useState(false);
     const [tokenActive, setTokenActive] = useState(false);
     const [startActive, setStartActive] = useState(false);
+    const [buttonActive, setButtonActive] = useState(false);
 
     const handleInputChange = (el, event) => {
         switch (el) {
@@ -22,6 +26,9 @@ function Info({ settings, editSettings }) {
                 break;
             case "start":
                 setStartInput(event.target.value);
+                break;
+            case "button":
+                setButtonInput(event.target.value);
                 break;
 
             default:
@@ -50,6 +57,13 @@ function Info({ settings, editSettings }) {
     },
         [startActive],
     )
+    const editingButton = useCallback(() => {
+        setButtonActive(true)
+        refButton.current.focus();
+        refButton.current.selectionButton = buttonInput.length
+    },
+        [buttonActive],
+    )
 
     const handleSave = (el) => {
         switch (el) {
@@ -62,6 +76,9 @@ function Info({ settings, editSettings }) {
             case "start":
                 setStartActive(false);
                 break;
+            case "button":
+                setButtonActive(false);
+                break;
 
             default:
                 break;
@@ -69,7 +86,8 @@ function Info({ settings, editSettings }) {
         const newSettings = {
             fileName: nameInput + ".py",
             token: tokenInput,
-            startMsg: startInput
+            startMsg: startInput,
+            firstBtn: buttonInput
         }
         editSettings(newSettings)
     };
@@ -123,6 +141,21 @@ function Info({ settings, editSettings }) {
                     />
                     <button onClick={editingStart} className="info-btn info-btn3">
                         Edit start
+                    </button>
+                </div>
+
+                <div className={buttonActive ? "info-block info-block4 info-block4__active" : "info-block info-block4"}>
+                    <input
+                        onBlur={() => handleSave("button")}
+                        type="text"
+                        ref={refButton}
+                        placeholder="Write button text..."
+                        value={buttonInput}
+                        onChange={(event) => handleInputChange("button", event)}
+                        className={buttonActive ? "info-input info-input__active" : "info-input"}
+                    />
+                    <button onClick={editingButton} className="info-btn info-btn3">
+                        Edit button
                     </button>
                 </div>
             </div>

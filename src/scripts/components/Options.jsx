@@ -7,6 +7,7 @@ import Timesleeps from "./Timesleeps";
 
 function Options({ block, blockIndex, editBlock }) {
     const chboxCustomRef = useRef()
+    const chboxSleepRef = useRef()
     const initialButtons = [{ name: "Button 1", input: "" }]
     const initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
     const [buttons, setButtons] = useState(initialButtons)
@@ -15,6 +16,7 @@ function Options({ block, blockIndex, editBlock }) {
     const [wiretapping, setWiretapping] = useState("")
     const [initialTime, setInitialTime] = useState(0.1)
     const [custom, setCustom] = useState(false)
+    const [sleep, setSleep] = useState(false)
 
     const handleAnswerChange = (event) => {
         setAnswer(event.target.value)
@@ -27,7 +29,7 @@ function Options({ block, blockIndex, editBlock }) {
     }
 
     const handleEditBlock = () => {
-        editBlock({ name: block.name, wiretapping: wiretapping, answer: answer, active: false, buttons: buttons, timesleeps: timesleeps, initialTimesleep: initialTime, custom: custom }, blockIndex)
+        editBlock({ name: block.name, wiretapping: wiretapping, answer: answer, active: false, buttons: buttons, timesleeps: timesleeps, initialTimesleep: initialTime, custom: custom, sleep: sleep }, blockIndex)
     };
 
     //--Buttons--//
@@ -87,6 +89,13 @@ function Options({ block, blockIndex, editBlock }) {
         }
     }
 
+    const sleepChange = () => {
+        if (chboxSleepRef.current.checked) {
+            setSleep(true)
+        } else {
+            setSleep(false)
+        }
+    }
 
     return (
         <div className={block.active ? "options-wrapper options-wrapper__active" : "options-wrapper"} onClick={handleEditBlock}>
@@ -108,7 +117,7 @@ function Options({ block, blockIndex, editBlock }) {
                         </div>
                         <div className="options-custom">
                             <label className="switch">
-                                <input type="checkbox" />
+                                <input ref={chboxSleepRef} onChange={sleepChange} type="checkbox" />
                                 <span className="slider"></span>
                             </label>
                             <div className="options-custom__border"></div>
