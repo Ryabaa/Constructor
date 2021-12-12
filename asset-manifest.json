@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Constructor/static/css/main.86a9d1b0.chunk.css",
+    "main.js": "/Constructor/static/js/main.a8afc20e.chunk.js",
+    "main.js.map": "/Constructor/static/js/main.a8afc20e.chunk.js.map",
+    "runtime-main.js": "/Constructor/static/js/runtime-main.5b94615f.js",
+    "runtime-main.js.map": "/Constructor/static/js/runtime-main.5b94615f.js.map",
+    "static/js/2.06fda2e7.chunk.js": "/Constructor/static/js/2.06fda2e7.chunk.js",
+    "static/js/2.06fda2e7.chunk.js.map": "/Constructor/static/js/2.06fda2e7.chunk.js.map",
+    "index.html": "/Constructor/index.html",
+    "precache-manifest.18f98402211023d6f93cd57345910c32.js": "/Constructor/precache-manifest.18f98402211023d6f93cd57345910c32.js",
+    "service-worker.js": "/Constructor/service-worker.js",
+    "static/css/main.86a9d1b0.chunk.css.map": "/Constructor/static/css/main.86a9d1b0.chunk.css.map",
+    "static/js/2.06fda2e7.chunk.js.LICENSE.txt": "/Constructor/static/js/2.06fda2e7.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/Constructor/static/media/background.9beb07b5.jpg",
+    "static/media/cross.png": "/Constructor/static/media/cross.639747c2.png",
+    "static/media/menu.svg": "/Constructor/static/media/menu.049b361e.svg",
+    "static/media/plus.svg": "/Constructor/static/media/plus.60867f2a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5b94615f.js",
+    "static/js/2.06fda2e7.chunk.js",
+    "static/css/main.86a9d1b0.chunk.css",
+    "static/js/main.a8afc20e.chunk.js"
+  ]
+}
