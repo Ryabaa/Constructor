@@ -1,8 +1,10 @@
 import React, { useCallback, useState, useRef } from "react";
-import cross from "../../img/cross.png";
-import plus from "../../img/plus.svg";
+
 import Buttons from "./Buttons";
 import Timesleeps from "./Timesleeps";
+
+import cross from "../img/cross.png";
+import plus from "../img/plus.svg";
 
 
 function Options({ block, blockIndex, editBlock }) {

@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import cross from "../../img/cross.png";
-import menu from "../../img/menu.svg";
-import pencil from "../../img/pencil.png";
+
+import cross from "../img/cross.png";
+import menu from "../img/menu.svg";
+import pencil from "../img/pencil.png";
 
 
 function Block({ deleteBlock, editBlock, block, blockIndex }) {

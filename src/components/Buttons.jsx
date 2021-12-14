@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import cross from "../../img/cross.png";
+
+import cross from "../img/cross.png";
 
 function Buttons({ index, button, deleteButton, editButton }) {
     const initialInput = button.input;

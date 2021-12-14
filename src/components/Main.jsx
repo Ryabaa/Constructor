@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react";
+import axios from "axios";
+
 import BlocksSection from "./BlocksSection.jsx";
 import Info from "./Info.jsx";
-import axios from "axios";
 
 
 const initialSettings = {
@@ -64,7 +65,7 @@ function Main() {
             let sleep_timesValues = [block.initialTimesleep]
             let sleep_texts = []
 
-            if (block.custom == true) {
+            if (block.custom === true) {
                 obj.custom_code_blocks.push(block.wiretapping)
             } else {
                 obj.sleep_times[block.wiretapping] = sleep_timesValues;
@@ -76,7 +77,7 @@ function Main() {
                 })
             }
 
-            if (block.sleep == true) {
+            if (block.sleep === true) {
                 commands.splice(1, 0, 'sleep');
                 block.timesleeps.forEach(i => {
                     if (i.value !== 0) {

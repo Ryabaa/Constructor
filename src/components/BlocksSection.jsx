@@ -1,7 +1,9 @@
 import React from "react";
-import plus from "../../img/plus.svg";
+
 import Block from "./Block.jsx";
 import Options from "./Options.jsx";
+
+import plus from "../img/plus.svg";
 
 function BlocksSection({ blocks, addBlock, editBlock, deleteBlock, sendRequest }) {
 

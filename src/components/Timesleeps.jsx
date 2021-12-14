@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import cross from "../../img/cross.png";
+
+import cross from "../img/cross.png";
 
 function Timesleeps({ index, timesleep, deleteTimesleep, editTimesleep }) {
     const initialValue = timesleep.value;
