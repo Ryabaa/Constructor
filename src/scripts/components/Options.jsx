@@ -9,7 +9,7 @@ function Options({ block, blockIndex, editBlock }) {
     const chboxCustomRef = useRef()
     const chboxSleepRef = useRef()
     const initialButtons = [{ name: "Button 1", input: "" }]
-    const initialTimesleeps = [{ name: "Text 1", input: "", value: 0.1 }]
+    const initialTimesleeps = []
     const [buttons, setButtons] = useState(initialButtons)
     const [timesleeps, setTimesleeps] = useState(initialTimesleeps)
     const [answer, setAnswer] = useState("")
@@ -87,6 +87,15 @@ function Options({ block, blockIndex, editBlock }) {
         } else {
             setCustom(false)
         }
+
+        if (custom === false) {
+            setButtons([])
+        } else {
+            if (sleep === true) {
+                setTimesleeps(initialTimesleeps)
+            }
+            setButtons(initialButtons)
+        }
     }
 
     const sleepChange = () => {
@@ -94,6 +103,14 @@ function Options({ block, blockIndex, editBlock }) {
             setSleep(true)
         } else {
             setSleep(false)
+        }
+
+        if (sleep === true) {
+            setTimesleeps(initialTimesleeps)
+        } else {
+            if (custom === false) {
+                addTimesleep()
+            }
         }
     }
 
@@ -138,51 +155,57 @@ function Options({ block, blockIndex, editBlock }) {
                     </div>
                     <input placeholder="Enter text..." onChange={handleAnswerChange} value={answer} type="text" className="options-container__input" />
                 </div>
-                <div className="options-box">
+                {
+                    custom === false &&
+                    <div className="options-box">
 
-                    <div className="options-buttons">
-                        <h2 className="options-buttons__title">Buttons</h2>
-                        {
-                            buttons.map((button, index) => (
-                                <Buttons
-                                    key={'Buttons' + index}
-                                    index={index}
-                                    button={button}
-                                    editButton={editButton}
-                                    deleteButton={deleteButton}
-                                />
-                            ))
-                        }
-                        <button onClick={addButton} className="options-buttons__block-add">
-                            <img src={plus} alt="" />
-                        </button>
-                    </div>
-
-                    <div className="options-timesleeps">
-                        <h2 className="options-timesleeps__title">Timesleeps</h2>
-                        <div className="options-timesleeps__initial">
-                            <p className="options-timesleeps__initial-text">Initial timesleep</p>
-                            <div className="options-timesleeps__block-time">
-                                <input type="number" value={initialTime} onChange={handleChangeTime} className="options-timesleeps__block-time" />
-                            </div>
+                        <div className="options-buttons">
+                            <h2 className="options-buttons__title">Buttons</h2>
+                            {
+                                buttons.map((button, index) => (
+                                    <Buttons
+                                        key={'Buttons' + index}
+                                        index={index}
+                                        button={button}
+                                        editButton={editButton}
+                                        deleteButton={deleteButton}
+                                    />
+                                ))
+                            }
+                            <button onClick={addButton} className="options-buttons__block-add">
+                                <img src={plus} alt="" />
+                            </button>
                         </div>
                         {
-                            timesleeps.map((timesleep, index) => (
-                                <Timesleeps
-                                    key={'Timesleeps' + index}
-                                    index={index}
-                                    timesleep={timesleep}
-                                    editTimesleep={editTimesleep}
-                                    deleteTimesleep={deleteTimesleep}
-                                />
-                            ))
+                            sleep === true &&
+                            <div className="options-timesleeps">
+                                <h2 className="options-timesleeps__title">Timesleeps</h2>
+                                <div className="options-timesleeps__initial">
+                                    <p className="options-timesleeps__initial-text">Initial timesleep</p>
+                                    <div className="options-timesleeps__block-time">
+                                        <input type="number" value={initialTime} onChange={handleChangeTime} className="options-timesleeps__block-time" />
+                                    </div>
+                                </div>
+                                {
+                                    timesleeps.map((timesleep, index) => (
+                                        <Timesleeps
+                                            key={'Timesleeps' + index}
+                                            index={index}
+                                            timesleep={timesleep}
+                                            editTimesleep={editTimesleep}
+                                            deleteTimesleep={deleteTimesleep}
+                                        />
+                                    ))
+                                }
+                                <button onClick={addTimesleep} className="options-timesleeps__block-add">
+                                    <img src={plus} alt="" />
+                                </button>
+                            </div>
                         }
-                        <button onClick={addTimesleep} className="options-timesleeps__block-add">
-                            <img src={plus} alt="" />
-                        </button>
+
                     </div>
 
-                </div>
+                }
             </section>
         </div>
     );

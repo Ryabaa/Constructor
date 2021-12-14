@@ -12,9 +12,9 @@ const initialSettings = {
 }
 
 const initialBlocks = [
-    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
-    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
-    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false },
+    { name: "Block 1", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [], initialTimesleep: 0.1, custom: false, sleep: false },
+    { name: "Block 2", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [], initialTimesleep: 0.1, custom: false, sleep: false },
+    { name: "Block 3", wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [], initialTimesleep: 0.1, custom: false, sleep: false },
 ];
 
 function Main() {
@@ -22,7 +22,7 @@ function Main() {
     const [settings, setSettings] = useState(initialSettings)
 
     const addBlock = useCallback(() => {
-        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [{ name: "Text 1", input: "", value: 0.1 }], initialTimesleep: 0.1, custom: false, sleep: false }]);
+        setBlocks([...blocks, { name: "Block " + (blocks.length + 1), wiretapping: "", answer: "", active: false, buttons: [{ name: "Button 1", input: "" }], timesleeps: [], initialTimesleep: 0.1, custom: false, sleep: false }]);
     }, [blocks]);
 
     const deleteBlock = useCallback(
@@ -95,15 +95,19 @@ function Main() {
 
     const sendRequest = async () => {
         let pyObject = buildObject()
-        const res = await axios
-            .post("http://localhost:8000/data", pyObject)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        return await res;
+        await axios.post("http://localhost:8000/data", pyObject)
+        await axios({
+            url: 'http://localhost:8000/download',
+            method: 'GET',
+            responseType: 'blob',
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', pyObject.bot_settings.fileName);
+            document.body.appendChild(link);
+            link.click();
+        });
     }
 
 

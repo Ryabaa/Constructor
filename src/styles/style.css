@@ -218,7 +218,7 @@ body::before {
 
 .info-block:hover input {
   visibility: visible;
-  width: 200px;
+  width: 250px;
 }
 
 .info-block:hover input::-webkit-input-placeholder {
@@ -257,7 +257,7 @@ body::before {
 
 .info-block1__active input {
   visibility: visible;
-  width: 200px;
+  width: 250px;
   color: #fff;
 }
 
@@ -297,7 +297,7 @@ body::before {
 
 .info-block2__active input {
   visibility: visible;
-  width: 200px;
+  width: 250px;
   color: #fff;
 }
 
@@ -337,7 +337,7 @@ body::before {
 
 .info-block3__active input {
   visibility: visible;
-  width: 200px;
+  width: 250px;
   color: #fff;
 }
 
@@ -377,7 +377,7 @@ body::before {
 
 .info-block4__active input {
   visibility: visible;
-  width: 200px;
+  width: 250px;
   color: #fff;
 }
 

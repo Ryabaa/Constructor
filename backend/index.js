@@ -15,14 +15,16 @@ app.use(function (req, res, next) {
 });
 app.use(cors());
 
-const handler = (req, res) => {
+let fileName = ""
+
+const dataHandler = (req, res) => {
     let data = req.body
     let jsonData = JSON.stringify(data)
 
     let time = new Date().toLocaleTimeString()
     let date = new Date().toLocaleDateString()
 
-    const fileName = data.bot_settings.fileName
+    fileName = data.bot_settings.fileName
     const pyCode = createPyCode(date, time, jsonData)
 
     fs.writeFile(fileName, pyCode, (err) => {
@@ -31,13 +33,16 @@ const handler = (req, res) => {
             return;
         }
     });
-
-    console.log('Succes!')
     res.send("Succes");
 }
 
+const downloadHandler = (req, res) => {
+    res.download(fileName)
+}
 
-app.use("/data", handler);
+
+app.post("/data", dataHandler);
+app.get("/download", downloadHandler);
 
 app.listen(8000, () => {
     console.log(`Сервер запущен: http://localhost:8000`);
