@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import cross from "../img/cross.png";
-import menu from "../img/menu.svg";
-import pencil from "../img/pencil.png";
+import { IconContext } from "react-icons/lib";
+import { FaPencilAlt } from "react-icons/fa";
+import { IoOptions } from 'react-icons/io5';
+import { CgClose } from "react-icons/cg";
 
 
 function Block({ deleteBlock, editBlock, block, blockIndex }) {
@@ -56,15 +57,21 @@ function Block({ deleteBlock, editBlock, block, blockIndex }) {
                         className="blocks-name__input"
                     />
                     <button onClick={startEditing} className="blocks-name__btn">
-                        <img src={pencil} alt="" />
+                        <IconContext.Provider value={{ className: 'pencil-icon' }}>
+                            <FaPencilAlt />
+                        </IconContext.Provider>
                     </button>
                 </div>
                 <button onClick={handleEditActive} className="blocks-params">
-                    <img className="blocks-menu" src={menu} alt="" />
+                    <IconContext.Provider value={{ className: 'params-icon' }}>
+                        <IoOptions />
+                    </IconContext.Provider>
                 </button>
             </div>
             <button onClick={handleDelete} type="submit" className="blocks-delete">
-                <img src={cross} alt="" />
+                <IconContext.Provider value={{ className: 'cross-icon' }}>
+                    <CgClose />
+                </IconContext.Provider>
             </button>
         </div>
     );

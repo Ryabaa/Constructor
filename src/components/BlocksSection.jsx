@@ -3,7 +3,9 @@ import React from "react";
 import Block from "./Block.jsx";
 import Options from "./Options.jsx";
 
-import plus from "../img/plus.svg";
+import { BsPlusLg } from "react-icons/bs";
+import { HiDownload } from "react-icons/hi";
+import { IconContext } from "react-icons";
 
 function BlocksSection({ blocks, addBlock, editBlock, deleteBlock, sendRequest }) {
 
@@ -31,9 +33,16 @@ function BlocksSection({ blocks, addBlock, editBlock, deleteBlock, sendRequest }
             }
             <div className="blocks-footer">
                 <button onClick={addBlock} className="blocks-btn">
-                    <img src={plus} alt="" />
+                    <IconContext.Provider value={{ className: 'add-icon' }}>
+                        <BsPlusLg />
+                    </IconContext.Provider>
                 </button>
-                <button onClick={sendRequest} className="download">Download</button>
+                <button onClick={sendRequest} className="download">
+                    Download
+                    <IconContext.Provider value={{ className: 'download-icon' }}>
+                        <HiDownload />
+                    </IconContext.Provider>
+                </button>
             </div>
         </div>
     );

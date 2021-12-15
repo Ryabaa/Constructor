@@ -52,7 +52,7 @@ function Timesleeps({ index, timesleep, deleteTimesleep, editTimesleep }) {
                     />
                 </div>
             </div>
-            <div className="options-Timesleeps__block-line"></div>
+            <div className="options-buttons__block-line"></div>
             <button onClick={handleDelete} type="submit" className="options-timesleeps__block-delete">
                 <img src={cross} alt="" />
             </button>

@@ -5,6 +5,8 @@ import Timesleeps from "./Timesleeps";
 
 import cross from "../img/cross.png";
 import plus from "../img/plus.svg";
+import { BsPlusLg } from "react-icons/bs";
+import { IconContext } from "react-icons";
 
 
 function Options({ block, blockIndex, editBlock }) {
@@ -175,7 +177,9 @@ function Options({ block, blockIndex, editBlock }) {
                                 ))
                             }
                             <button onClick={addButton} className="options-buttons__block-add">
-                                <img src={plus} alt="" />
+                                <IconContext.Provider value={{ className: 'add-icon' }}>
+                                    <BsPlusLg />
+                                </IconContext.Provider>
                             </button>
                         </div>
                         {
@@ -200,7 +204,9 @@ function Options({ block, blockIndex, editBlock }) {
                                     ))
                                 }
                                 <button onClick={addTimesleep} className="options-timesleeps__block-add">
-                                    <img src={plus} alt="" />
+                                    <IconContext.Provider value={{ className: 'add-icon' }}>
+                                        <BsPlusLg />
+                                    </IconContext.Provider>
                                 </button>
                             </div>
                         }

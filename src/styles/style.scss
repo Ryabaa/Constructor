@@ -17,11 +17,12 @@ html {
 ::-webkit-scrollbar {
     width: 15px;
     height: 8px;
-    background: #3a3a3a;
+    background: #22273a;
+    border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #808080;
+    background-color: #383b4d;
     border-radius: 10px;
     @include slowTrans();
     &:hover {
@@ -56,9 +57,9 @@ input {
 
 body {
     position: relative;
-
+    background-color: #22273a;
     &::before {
-        background: url("../img/background.jpg") no-repeat center center;
+        background: url("../img/background.jpg") no-repeat bottom center;
         background-size: cover;
         content: " ";
         height: 100%;
@@ -268,8 +269,12 @@ body {
 
 .download {
     border: 2px solid $secondary;
-    width: 170px;
-    height: 60px;
+    width: 190px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
     border-radius: 20px;
     color: $optionsText;
     font-size: 20px;
@@ -281,6 +286,65 @@ body {
     &:hover {
         background: $teritary;
         color: $secondary;
+        .download-icon {
+            color: white;
+        }
+    }
+}
+
+.pencil-icon {
+    height: 25px;
+    width: 25px;
+    color: #202020;
+    @include slowTrans();
+}
+.cross-icon {
+    height: 35px;
+    width: 35px;
+    color: #fff;
+    @include slowTrans();
+}
+.params-icon {
+    height: 45px;
+    width: 45px;
+    color: #4b4b4b;
+    @include slowTrans();
+}
+.add-icon {
+    height: 30px;
+    width: 30px;
+    color: #4b4b4b;
+    @include slowTrans();
+}
+.download-icon {
+    height: 50px;
+    width: 50px;
+    color: #4b4b4b;
+    animation: pulsing 2s infinite;
+    @include slowTrans();
+}
+
+@-webkit-keyframes pulsing {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    50% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(0.5, 0.5);
+    }
+}
+
+@keyframes pulsing {
+    0% {
+        transform: scale(0.5, 0.5);
+    }
+    50% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(0.5, 0.5);
     }
 }
 
@@ -305,7 +369,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-radius: 10px;
+        border-radius: 25px;
         border: $secondary 2px solid;
         width: 500px;
         height: 80px;
@@ -336,7 +400,7 @@ body {
         align-items: center;
         column-gap: 30px;
         background: $teritary;
-        border-radius: 5px 30px 30px 5px;
+        border-radius: 20px 40px 40px 20px;
         width: 65%;
         padding-left: 20px;
         height: 100%;
@@ -359,13 +423,10 @@ body {
             justify-self: end;
             height: 100%;
             &:hover {
-                & img {
-                    width: 50px;
+                .pencil-icon {
+                    width: 42px;
+                    height: 42px;
                 }
-            }
-            & img {
-                width: 30px;
-                @include slowTrans();
             }
         }
     }
@@ -380,9 +441,10 @@ body {
         @include slowTrans();
         &:hover {
             background: $teritary;
-        }
-        & img {
-            height: 25px;
+            .cross-icon {
+                width: 50px;
+                height: 50px;
+            }
         }
     }
     &-menu {
@@ -397,18 +459,15 @@ body {
         background: $secondary;
         cursor: pointer;
         column-gap: 10px;
-        border-radius: 0 5px 5px 0;
+        border-radius: 0 20px 20px 0;
         font-size: 15px;
         color: $secondary;
         @include slowTrans();
         &:hover {
-            & img {
-                width: 75px;
+            .params-icon {
+                width: 60px;
+                height: 60px;
             }
-        }
-        & img {
-            width: 40px;
-            @include slowTrans();
         }
     }
     &-btn {
@@ -418,19 +477,16 @@ body {
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        border-radius: 20px;
+        background: $secondary;
+        border-radius: 30px;
         margin-top: 20px;
         border: $secondary 2px solid;
         @include slowTrans();
         &:hover {
             background: $teritary;
-            & img {
-                transform: scale(1);
+            .add-icon {
+                color: #fff;
             }
-        }
-        & img {
-            transform: scale(0.8);
-            @include slowTrans();
         }
     }
 }
@@ -503,14 +559,16 @@ body {
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 50px;
             background: $teritary;
             @include slowTrans();
+            .add-icon {
+                width: 25px;
+                height: 25px;
+                color: #fff;
+            }
             &:hover {
                 background: #d4d4d49d;
-            }
-            & img {
-                width: 25px;
             }
         }
     }
@@ -524,7 +582,7 @@ body {
     position: relative;
     padding: 50px 5%;
     border-radius: 65px 10px 10px 65px;
-    background: #4747477e;
+    background: #282d41ad;
     opacity: 1;
     z-index: 99;
     overflow-x: hidden;

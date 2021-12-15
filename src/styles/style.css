@@ -10,11 +10,12 @@ html {
 ::-webkit-scrollbar {
   width: 15px;
   height: 8px;
-  background: #3a3a3a;
+  background: #22273a;
+  border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #808080;
+  background-color: #383b4d;
   border-radius: 10px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -53,10 +54,11 @@ input {
 
 body {
   position: relative;
+  background-color: #22273a;
 }
 
 body::before {
-  background: url("../img/background.jpg") no-repeat center center;
+  background: url("../img/background.jpg") no-repeat bottom center;
   background-size: cover;
   content: " ";
   height: 100%;
@@ -399,8 +401,18 @@ body::before {
 
 .download {
   border: 2px solid #fff;
-  width: 170px;
-  height: 60px;
+  width: 190px;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-left: 20px;
   border-radius: 20px;
   color: #3a3a3a;
   font-size: 20px;
@@ -415,6 +427,82 @@ body::before {
 .download:hover {
   background: #ffffff28;
   color: #fff;
+}
+
+.download:hover .download-icon {
+  color: white;
+}
+
+.pencil-icon {
+  height: 25px;
+  width: 25px;
+  color: #202020;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.cross-icon {
+  height: 35px;
+  width: 35px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.params-icon {
+  height: 45px;
+  width: 45px;
+  color: #4b4b4b;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.add-icon {
+  height: 30px;
+  width: 30px;
+  color: #4b4b4b;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.download-icon {
+  height: 50px;
+  width: 50px;
+  color: #4b4b4b;
+  -webkit-animation: pulsing 2s infinite;
+          animation: pulsing 2s infinite;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+@-webkit-keyframes pulsing {
+  0% {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+  }
+  50% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  100% {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+  }
+}
+
+@keyframes pulsing {
+  0% {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+  }
+  50% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  100% {
+    -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+  }
 }
 
 .blocks {
@@ -461,7 +549,7 @@ body::before {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 10px;
+  border-radius: 25px;
   border: #fff 2px solid;
   width: 500px;
   height: 80px;
@@ -506,7 +594,7 @@ body::before {
   -webkit-column-gap: 30px;
           column-gap: 30px;
   background: #ffffff28;
-  border-radius: 5px 30px 30px 5px;
+  border-radius: 20px 40px 40px 20px;
   width: 65%;
   padding-left: 20px;
   height: 100%;
@@ -540,14 +628,9 @@ body::before {
   height: 100%;
 }
 
-.blocks-name__btn:hover img {
-  width: 50px;
-}
-
-.blocks-name__btn img {
-  width: 30px;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+.blocks-name__btn:hover .pencil-icon {
+  width: 42px;
+  height: 42px;
 }
 
 .blocks-delete {
@@ -567,8 +650,9 @@ body::before {
   background: #ffffff28;
 }
 
-.blocks-delete img {
-  height: 25px;
+.blocks-delete:hover .cross-icon {
+  width: 50px;
+  height: 50px;
 }
 
 .blocks-menu {
@@ -591,21 +675,16 @@ body::before {
   cursor: pointer;
   -webkit-column-gap: 10px;
           column-gap: 10px;
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 20px 20px 0;
   font-size: 15px;
   color: #fff;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-.blocks-params:hover img {
-  width: 75px;
-}
-
-.blocks-params img {
-  width: 40px;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+.blocks-params:hover .params-icon {
+  width: 60px;
+  height: 60px;
 }
 
 .blocks-btn {
@@ -621,7 +700,8 @@ body::before {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 30px;
   margin-top: 20px;
   border: #fff 2px solid;
   -webkit-transition: all 0.3s ease;
@@ -632,16 +712,8 @@ body::before {
   background: #ffffff28;
 }
 
-.blocks-btn:hover img {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.blocks-btn img {
-  -webkit-transform: scale(0.8);
-          transform: scale(0.8);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+.blocks-btn:hover .add-icon {
+  color: #fff;
 }
 
 .options {
@@ -659,7 +731,7 @@ body::before {
   position: relative;
   padding: 50px 5%;
   border-radius: 65px 10px 10px 65px;
-  background: #4747477e;
+  background: #282d41ad;
   opacity: 1;
   z-index: 99;
   overflow-x: hidden;
@@ -997,18 +1069,20 @@ body::before {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 50px;
   background: #ffffff28;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-.options-timesleeps__block-add:hover {
-  background: #d4d4d49d;
+.options-timesleeps__block-add .add-icon {
+  width: 25px;
+  height: 25px;
+  color: #fff;
 }
 
-.options-timesleeps__block-add img {
-  width: 25px;
+.options-timesleeps__block-add:hover {
+  background: #d4d4d49d;
 }
 
 .options-timesleeps__block-time {
@@ -1175,18 +1249,20 @@ body::before {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 50px;
   background: #ffffff28;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-.options-buttons__block-add:hover {
-  background: #d4d4d49d;
+.options-buttons__block-add .add-icon {
+  width: 25px;
+  height: 25px;
+  color: #fff;
 }
 
-.options-buttons__block-add img {
-  width: 25px;
+.options-buttons__block-add:hover {
+  background: #d4d4d49d;
 }
 
 .options-buttons__block-name {
