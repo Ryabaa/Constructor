@@ -59,7 +59,7 @@ body {
     position: relative;
     background-color: #22273a;
     &::before {
-        background: url("../img/background.jpg") no-repeat bottom center;
+        background: url(../images/background.jpg) no-repeat bottom center;
         background-size: cover;
         content: " ";
         height: 100%;
@@ -162,106 +162,37 @@ body {
         justify-self: flex-end;
         transition: all ease 0.5s;
         border-radius: 20px 0 0 20px;
+        width: 170px;
+        & button {
+            width: 170px;
+        }
+        & input::placeholder {
+            color: #d3d3d3;
+        }
+        &__active {
+            width: 450px;
+            background: #262a3f7e;
+            & button {
+                background: $secondary;
+                color: #494949;
+                width: 170px;
+            }
+            & input {
+                visibility: visible;
+                width: 55%;
+                color: $secondary;
+            }
+        }
         &:hover {
             width: 450px;
+            background: #262a3f7e;
             & button {
                 background: $secondary;
                 color: #494949;
             }
             & input {
                 visibility: visible;
-                width: 250px;
-                &::placeholder {
-                    color: #a5a5a5;
-                }
-            }
-        }
-        &1 {
-            width: 170px;
-            & button {
-                width: 170px;
-            }
-            &__active {
-                width: 450px;
-                & button {
-                    background: $secondary;
-                    color: #494949;
-                    width: 170px;
-                }
-                & input {
-                    visibility: visible;
-                    width: 250px;
-                    color: $secondary;
-                }
-                & input::placeholder {
-                    color: #a5a5a5;
-                }
-            }
-        }
-        &2 {
-            width: 170px;
-            & button {
-                width: 170px;
-            }
-            &__active {
-                width: 450px;
-                & button {
-                    background: $secondary;
-                    color: #494949;
-                    width: 170px;
-                }
-                & input {
-                    visibility: visible;
-                    width: 250px;
-                    color: $secondary;
-                }
-            }
-            & input::placeholder {
-                color: #a5a5a5;
-            }
-        }
-        &3 {
-            width: 170px;
-            & button {
-                width: 170px;
-            }
-            &__active {
-                width: 450px;
-                & button {
-                    background: $secondary;
-                    color: #494949;
-                    width: 170px;
-                }
-                & input {
-                    visibility: visible;
-                    width: 250px;
-                    color: $secondary;
-                }
-            }
-            & input::placeholder {
-                color: #a5a5a5;
-            }
-        }
-        &4 {
-            width: 170px;
-            & button {
-                width: 170px;
-            }
-            &__active {
-                width: 450px;
-                & button {
-                    background: $secondary;
-                    color: #494949;
-                    width: 170px;
-                }
-                & input {
-                    visibility: visible;
-                    width: 250px;
-                    color: $secondary;
-                }
-                & input::placeholder {
-                    color: #a5a5a5;
-                }
+                width: 55%;
             }
         }
     }
@@ -273,8 +204,7 @@ body {
     height: 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-left: 20px;
+    justify-content: center;
     border-radius: 20px;
     color: $optionsText;
     font-size: 20px;
@@ -295,7 +225,7 @@ body {
 .pencil-icon {
     height: 25px;
     width: 25px;
-    color: #202020;
+    color: #161616;
     @include slowTrans();
 }
 .cross-icon {
@@ -317,23 +247,12 @@ body {
     @include slowTrans();
 }
 .download-icon {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
     color: #4b4b4b;
     animation: pulsing 2s infinite;
     @include slowTrans();
-}
-
-@-webkit-keyframes pulsing {
-    0% {
-        transform: scale(0.5, 0.5);
-    }
-    50% {
-        transform: scale(1, 1);
-    }
-    100% {
-        transform: scale(0.5, 0.5);
-    }
 }
 
 @keyframes pulsing {
@@ -592,7 +511,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: url(../img/background.jpg) top;
+        background: url(../images/background.jpg) top;
         background-attachment: fixed;
         background-size: cover;
         position: fixed;
